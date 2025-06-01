@@ -178,7 +178,9 @@ const JobTable = ({ jobs }: { jobs: JobType[] }) => {
                   <div
                     className="truncate"
                     title={job.description}
-                    dangerouslySetInnerHTML={{ __html: job.description }}
+                    dangerouslySetInnerHTML={{
+                      __html: job.description.slice(0, 40),
+                    }}
                   />
                 </TableCell>
                 <TableCell>

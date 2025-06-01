@@ -169,67 +169,73 @@ const Index = async () => {
               Detailed view of your job applications
             </p>
           </CardHeader>
-          <CardContent>
-            <div className="rounded-lg border border-slate-200 overflow-hidden">
-              <Table>
-                <TableHeader>
-                  <TableRow className="bg-slate-50/80">
-                    <TableHead className="font-semibold text-slate-700">
-                      Date
-                    </TableHead>
-                    <TableHead className="font-semibold text-slate-700">
-                      Position
-                    </TableHead>
-                    <TableHead className="font-semibold text-slate-700">
-                      Company
-                    </TableHead>
-                    <TableHead className="font-semibold text-slate-700">
-                      Salary
-                    </TableHead>
-                    <TableHead className="font-semibold text-slate-700">
-                      Fees Paid
-                    </TableHead>
-                    <TableHead className="font-semibold text-slate-700">
-                      Status
-                    </TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {jobs.map((job) => (
-                    <TableRow
-                      key={job.id}
-                      className="hover:bg-slate-50/50 transition-colors duration-200 border-slate-100"
-                    >
-                      <TableCell className="font-medium text-slate-600">
-                        {formatDate(job.date)}
-                      </TableCell>
-                      <TableCell className="font-semibold text-slate-900">
-                        {job.jobName}
-                      </TableCell>
-                      <TableCell className="text-slate-700">
-                        {job.company}
-                      </TableCell>
-                      <TableCell className="font-semibold text-green-700">
-                        {job.wage}
-                      </TableCell>
-                      <TableCell>
-                        {job.feesPaid ? (
-                          <Badge className="bg-blue-100 text-blue-800 hover:bg-blue-100">
-                            Paid
-                          </Badge>
-                        ) : (
-                          <Badge variant="outline" className="text-slate-600">
-                            Unpaid
-                          </Badge>
-                        )}
-                      </TableCell>
-                      <TableCell>{getStatusBadge(job.status)}</TableCell>
+          {jobs.length > 0 ? (
+            <CardContent>
+              <div className="rounded-lg border border-slate-200 overflow-hidden">
+                <Table>
+                  <TableHeader>
+                    <TableRow className="bg-slate-50/80">
+                      <TableHead className="font-semibold text-slate-700">
+                        Date
+                      </TableHead>
+                      <TableHead className="font-semibold text-slate-700">
+                        Position
+                      </TableHead>
+                      <TableHead className="font-semibold text-slate-700">
+                        Company
+                      </TableHead>
+                      <TableHead className="font-semibold text-slate-700">
+                        Salary
+                      </TableHead>
+                      <TableHead className="font-semibold text-slate-700">
+                        Fees Paid
+                      </TableHead>
+                      <TableHead className="font-semibold text-slate-700">
+                        Status
+                      </TableHead>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+                  </TableHeader>
+                  <TableBody>
+                    {jobs.map((job) => (
+                      <TableRow
+                        key={job.id}
+                        className="hover:bg-slate-50/50 transition-colors duration-200 border-slate-100"
+                      >
+                        <TableCell className="font-medium text-slate-600">
+                          {formatDate(job.date)}
+                        </TableCell>
+                        <TableCell className="font-semibold text-slate-900">
+                          {job.jobName}
+                        </TableCell>
+                        <TableCell className="text-slate-700">
+                          {job.company}
+                        </TableCell>
+                        <TableCell className="font-semibold text-green-700">
+                          {job.wage}
+                        </TableCell>
+                        <TableCell>
+                          {job.feesPaid ? (
+                            <Badge className="bg-blue-100 text-blue-800 hover:bg-blue-100">
+                              Paid
+                            </Badge>
+                          ) : (
+                            <Badge variant="outline" className="text-slate-600">
+                              Unpaid
+                            </Badge>
+                          )}
+                        </TableCell>
+                        <TableCell>{getStatusBadge(job.status)}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            </CardContent>
+          ) : (
+            <div className="text-center text-slate-500 p-4">
+              No applications found
             </div>
-          </CardContent>
+          )}
         </Card>
       </div>
     </div>
