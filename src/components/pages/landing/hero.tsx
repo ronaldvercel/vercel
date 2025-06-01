@@ -36,7 +36,9 @@ const HeroSection: React.FC = () => {
               size="lg"
               className="group bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white px-10 py-5 text-lg font-medium rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl shadow-lg"
             >
-              <Link href={"/validate"}>Validate Token</Link>
+              <Link className="w-full h-full" href={"/validate"}>
+                Validate Token
+              </Link>
               <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Button>
             <Button
@@ -44,7 +46,9 @@ const HeroSection: React.FC = () => {
               variant="outline"
               className="group border-2 border-primary-600 text-primary-600 hover:bg-primary-50 hover:border-primary-700 px-10 py-5 text-lg font-medium rounded-2xl transition-all duration-300 transform hover:scale-105 backdrop-blur-sm"
             >
-              <Link href={"/login"}>Login</Link>
+              <Link className="w-full h-full" href={"/login"}>
+                Login
+              </Link>
 
               <Shield className="ml-2 h-5 w-5 transition-transform group-hover:rotate-12" />
             </Button>
