@@ -6,8 +6,8 @@ import Logo from "../Logo";
 import Link from "next/link";
 import { Disclosure, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { useRouter } from "next/navigation";
-import { logout } from "@/app/actions";
+// import { useRouter } from "next/navigation";
+// import { logout } from "@/app/actions";
 
 const generalLinks = [
   { label: "How It Works", href: "#how-it-works" },
@@ -31,9 +31,7 @@ const adminLinks = [
 
 const Header: React.FC = () => {
   const pathname = usePathname();
-
   let userType: "general" | "client" | "admin" = "general";
-
   if (pathname?.startsWith("/dashboard")) userType = "client";
   else if (pathname?.startsWith("/admin")) userType = "admin";
   else if (
@@ -48,7 +46,7 @@ const Header: React.FC = () => {
   if (userType === "client") navLinks = clientLinks;
   else if (userType === "admin") navLinks = adminLinks;
   else navLinks = generalLinks;
-  const router = useRouter();
+  // const router = useRouter();
 
   return (
     <Disclosure
@@ -60,9 +58,9 @@ const Header: React.FC = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex h-16 items-center justify-between">
               {/* Logo */}
-              <div className="flex items-center animate-fade-in">
+              <Link href={"/"} className="flex items-center animate-fade-in">
                 <Logo size="md" />
-              </div>
+              </Link>
 
               {/* Desktop nav */}
               <nav className="hidden md:flex items-center space-x-10 animate-fade-in delay-150">
@@ -77,7 +75,7 @@ const Header: React.FC = () => {
                   </Link>
                 ))}
               </nav>
-              {userType === "general" ? (
+              {/* {userType === "general" ? (
                 <Button
                   onClick={() => {
                     router.push("/validate");
@@ -95,7 +93,7 @@ const Header: React.FC = () => {
                 >
                   Logout
                 </Button>
-              )}
+              )} */}
 
               {/* Mobile menu button */}
               <div className="md:hidden">
