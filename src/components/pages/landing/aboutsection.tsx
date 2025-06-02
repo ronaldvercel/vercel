@@ -3,20 +3,27 @@ import { Shield, Users, Briefcase } from "lucide-react";
 
 const AboutSection: React.FC = () => {
   const companyLogos = [
-    "TechCorp",
-    "InnovateLabs",
-    "DataFlow",
-    "CloudSync",
-    "DevMaster",
-    "CodeBase",
-    "TechPro",
-    "DigitalEdge",
-    "SystemsPlus",
-    "WebForce",
+    "Kinsta",
+    "GoCanvas",
+    "Trainual",
+    "SimplePractice",
+    "Loom",
+    "WizeHire",
+    "Formstack",
+    "HashiCorp",
+    "Alteryx",
+    "Amplitude",
+    "Asana",
+    "Cloudflare",
+    "Twilio",
+    "Squarespace",
+    "Datadog",
+    "HubSpot",
+    "Insight Global",
   ];
 
   const stats = [
-    { number: "17", label: "Verified Companies" },
+    { number: "20", label: "Verified Companies" },
     { number: "95%", label: "Success Rate" },
     { number: "$120K+", label: "Average Salary" },
     { number: "24h", label: "Response Time" },

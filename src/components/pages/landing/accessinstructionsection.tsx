@@ -70,9 +70,6 @@ const AccessInstructionsSection: React.FC = () => {
           >
             Request Access Token
           </Button>
-          <p className="text-sm text-gray-500 mt-4">
-            Processing time: 24-48 hours
-          </p>
         </div>
       </div>
     </section>

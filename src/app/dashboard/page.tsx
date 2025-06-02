@@ -14,7 +14,7 @@ import {
 
 import { CheckCircle, XCircle, Clock, TrendingUp, Plus } from "lucide-react";
 import { auth } from "../auth";
-import { getUserApplicationsByEmail } from "../actions";
+import { getCompanyById, getUserApplicationsByEmail } from "../actions";
 import Link from "next/link";
 import { User } from "../types/types";
 import { mapUserJobsToSimpleJobs } from "@/lib/utils";
@@ -73,22 +73,43 @@ const Index = async () => {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-6">
       <div className="max-w-7xl mx-auto space-y-8">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-          <div>
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-slate-900 via-blue-900 to-indigo-900 bg-clip-text text-transparent">
-              Vercel Application Dashboard
-            </h1>
-            <p className="text-slate-600 mt-2">
-              Track your career journey with precision
-            </p>
-          </div>
-          <div className="flex gap-3">
-            <Link href={"/dashboard/jobs"} className="flex items-center">
-              <Button className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700">
-                <Plus className="h-4 w-4" />
-                View jobs
-              </Button>
-            </Link>
+        <div className="sticky top-[60px] z-10 bg-white/80 backdrop-blur-md border-b border-slate-200/50 shadow-sm">
+          <div className="max-w-7xl mx-auto px-6 py-6">
+            <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
+              <div className="space-y-1">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center">
+                    <TrendingUp className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-medium text-slate-600">
+                      Welcome back,
+                    </h3>
+                    <h2 className="text-xl font-semibold text-slate-900">
+                      {session?.user?.name}
+                    </h2>
+                  </div>
+                </div>
+              </div>
+
+              <div className="text-center flex-1 lg:flex-none">
+                <h1 className="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-slate-900 via-blue-900 to-indigo-900 bg-clip-text text-transparent">
+                  Career Dashboard
+                </h1>
+                <p className="text-slate-600 mt-1">
+                  Track your career journey with precision
+                </p>
+              </div>
+
+              <div className="flex gap-3">
+                <Link href={"/dashboard/jobs"} className="flex items-center">
+                  <Button className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 shadow-lg hover:shadow-xl transition-all duration-300">
+                    <Plus className="h-4 w-4" />
+                    View Jobs
+                  </Button>
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -196,37 +217,46 @@ const Index = async () => {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {jobs.map((job) => (
-                      <TableRow
-                        key={job.id}
-                        className="hover:bg-slate-50/50 transition-colors duration-200 border-slate-100"
-                      >
-                        <TableCell className="font-medium text-slate-600">
-                          {formatDate(job.date)}
-                        </TableCell>
-                        <TableCell className="font-semibold text-slate-900">
-                          {job.jobName}
-                        </TableCell>
-                        <TableCell className="text-slate-700">
-                          {job.company}
-                        </TableCell>
-                        <TableCell className="font-semibold text-green-700">
-                          {job.wage}
-                        </TableCell>
-                        <TableCell>
-                          {job.feesPaid ? (
-                            <Badge className="bg-blue-100 text-blue-800 hover:bg-blue-100">
-                              Paid
-                            </Badge>
-                          ) : (
-                            <Badge variant="outline" className="text-slate-600">
-                              Unpaid
-                            </Badge>
-                          )}
-                        </TableCell>
-                        <TableCell>{getStatusBadge(job.status)}</TableCell>
-                      </TableRow>
-                    ))}
+                    {jobs.map(async (job) => {
+                      const companyName = (await getCompanyById(
+                        job.company
+                      )) as unknown as { data: { name: string } };
+                      console.log("Company Name:", companyName);
+                      return (
+                        <TableRow
+                          key={job.id}
+                          className="hover:bg-slate-50/50 transition-colors duration-200 border-slate-100"
+                        >
+                          <TableCell className="font-medium text-slate-600">
+                            {formatDate(job.date)}
+                          </TableCell>
+                          <TableCell className="font-semibold text-slate-900">
+                            {job.jobName}
+                          </TableCell>
+                          <TableCell className="text-slate-700">
+                            {companyName.data?.name}
+                          </TableCell>
+                          <TableCell className="font-semibold text-green-700">
+                            {job.wage}
+                          </TableCell>
+                          <TableCell>
+                            {job.feesPaid ? (
+                              <Badge className="bg-blue-100 text-blue-800 hover:bg-blue-100">
+                                Paid
+                              </Badge>
+                            ) : (
+                              <Badge
+                                variant="outline"
+                                className="text-slate-600"
+                              >
+                                Unpaid
+                              </Badge>
+                            )}
+                          </TableCell>
+                          <TableCell>{getStatusBadge(job.status)}</TableCell>
+                        </TableRow>
+                      );
+                    })}
                   </TableBody>
                 </Table>
               </div>

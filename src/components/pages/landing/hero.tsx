@@ -32,22 +32,26 @@ const HeroSection: React.FC = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16 animate-fade-in delay-500">
-            <Button
-              size="lg"
-              className="group bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white px-10 py-5 text-lg font-medium rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl shadow-lg"
-            >
-              <Link href={"/validate"}>Validate Token</Link>
-              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="group border-2 border-primary-600 text-primary-600 hover:bg-primary-50 hover:border-primary-700 px-10 py-5 text-lg font-medium rounded-2xl transition-all duration-300 transform hover:scale-105 backdrop-blur-sm"
-            >
-              <Link href={"/login"}>Login</Link>
+            <Link className="block w-full" href={"/validate"}>
+              <Button
+                size="lg"
+                className="group w-full bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white px-10 py-5 text-lg font-medium rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl shadow-lg"
+              >
+                Validate Token
+                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+              </Button>
+            </Link>
 
-              <Shield className="ml-2 h-5 w-5 transition-transform group-hover:rotate-12" />
-            </Button>
+            <Link href={"/login"} className="block w-full">
+              <Button
+                size="lg"
+                variant="outline"
+                className="group w-full border-2 border-primary-600 text-primary-600 hover:bg-primary-50 hover:border-primary-700 px-10 py-5 text-lg font-medium rounded-2xl transition-all duration-300 transform hover:scale-105 backdrop-blur-sm"
+              >
+                Login
+                <Shield className="ml-2 h-5 w-5 transition-transform group-hover:rotate-12" />
+              </Button>
+            </Link>
           </div>
 
           {/* Enhanced trust indicators with animations */}

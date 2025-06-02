@@ -3,11 +3,11 @@ import React from "react";
 const TestimonialsSection: React.FC = () => {
   const testimonials = [
     {
-      name: "Sarah Johnson",
+      name: "Ally Johnson",
       role: "Senior Developer",
       company: "TechCorp",
       image:
-        "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face&auto=format",
+        "https://www.startpage.com/av/proxy-image?piurl=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1522529599102-193c0d76b5b6%3Ffm%3Djpg%26q%3D60%26w%3D3000%26ixlib%3Drb-4.1.0%26ixid%3DM3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmxhY2slMjBwZXJzb258ZW58MHx8MHx8fDA%253D&sp=1748861834T9db547a5dec6e28a43679b14d66cb65faaf9153f404eadaec27ad2b2d5cf81a6",
       content:
         "VercelJobs connected me with my dream role at an amazing company. The process was seamless and the opportunities were exactly what I was looking for.",
     },

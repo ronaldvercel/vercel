@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
 import Logo from "../Logo";
 
 const Footer: React.FC = () => {
@@ -15,12 +15,12 @@ const Footer: React.FC = () => {
             Join thousands of professionals who have found their dream jobs
             through VercelJobs
           </p>
-          <Button
+          {/* <Button
             size="lg"
             className="bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 text-lg font-medium rounded-xl"
           >
             Validate token
-          </Button>
+          </Button> */}
         </div>
 
         {/* Footer Links */}

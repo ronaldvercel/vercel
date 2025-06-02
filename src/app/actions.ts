@@ -613,10 +613,64 @@ export async function getUserApplicationsByEmail(email: string) {
     return userWithJobs;
 }
 
+export async function getCompanyById(companyId: string) {
+    await connectToDatabase();
+    if (!companyId) {
+        return {
+            success: false,
+            message: "Company ID is required",
+        };
+    }
+    try {
+        const company = await Company.findById(companyId).lean();
+        if (!company) {
+            return {
+                success: false,
+                message: "Company not found",
+            };
+        }
+        return {
+            success: true,
+            data: company,
+        };
+    } catch (error) {
+        console.error("Error fetching company by ID:", error);
+        return {
+            success: false,
+            message: "Failed to fetch company",
+        };
+    }
+}
 
 export async function logout() {
     await signOut({ redirectTo: "/" })
 }
+
+
+
+export async function getMetrics() {
+    try {
+        await connectToDatabase(); // important if you're using Mongoose
+        const [totalUsers, totalJobs, totalApplications, payments] = await Promise.all([
+            User.countDocuments(),
+            Job.countDocuments(),
+            Application.countDocuments(),
+            Payment.find({}, 'amount'), // only fetch the `amount` field
+        ]);
+
+        const totalRevenue = payments.reduce((sum, payment) => sum + payment.amount, 0);
+        return {
+            totalUsers,
+            totalRevenue,
+            totalJobs,
+            totalApplications,
+        };
+    } catch (error) {
+        console.error('Error fetching metrics:', error);
+        throw new Error('Failed to load metrics');
+    }
+}
+
 
 
 
